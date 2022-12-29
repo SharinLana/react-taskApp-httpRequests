@@ -1,20 +1,18 @@
 import React from "react";
-import styled from "styled-components";
+import { ListContainer } from "./TaskList.styled";
 import Task from "./Task";
 
-const Container = styled.div`
-  max-width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 3vh;
-`;
+const TaskList = ({ tasks, onRemoveTask }) => {
+  const removeTask = (taskId) => {
+    onRemoveTask(taskId);
+  };
 
-const TaskList = (props) => {
-  const eachTask = props.data.map((task) => {
-    return <Task key={task.id} task={task} />;
+  // SEPARATING TASKS TO DISPLAY THEM ONE BY ONE
+  const eachTask = tasks.map((task) => {
+    return <Task key={task.id} task={task} onRemoveTask={removeTask} />;
   });
-  return <Container>{eachTask}</Container>;
+
+  return <ListContainer>{eachTask}</ListContainer>;
 };
 
 export default TaskList;

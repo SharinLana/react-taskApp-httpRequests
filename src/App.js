@@ -1,39 +1,67 @@
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import Input from "./components/Input/Input";
 import TaskList from "./components/Tasks/TaskList";
-
-const dummy_data = [
-  {
-    id: "t1",
-    text: "Do excercises",
-  },
-  {
-    id: "t2",
-    text: "Finish HTML/CSS of the project",
-  },
-  {
-    id: "t3",
-    text: "Do laundry",
-  },
-];
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #1a0000;
-  width: 100%;
-  height: 100vh;
-`;
+import useHttp from "./hooks/useHttp";
+import { AppContainer, LoadingMessage, ErrorMessage } from "./App.styled";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+  const { isLoaded, error, sendRequest } = useHttp();
+
+  // FETCHING TASKS FROM FIREBASE REAL TIME DATABASE ON THE PAGE LOAD
+  useEffect(() => {
+    // PROCESSING THE HTTP RESPONSE {-NKUoos227ZB_pUV4MZw: {…}, -NKUopzufoRN04-p-ALd: {…}, …}
+    const applyData = (data) => {
+      const loadedTasks = [];
+
+      for (let key in data) {
+        loadedTasks.push({ id: key, text: data[key].text });
+      }
+      setTasks(loadedTasks);
+    };
+    // EXECUTING THE useHttp() CUSTOM HOOK
+    sendRequest(
+      {
+        url: "https://taskapp-fetch-post-default-rtdb.firebaseio.com/tasks.json",
+      },
+      applyData
+    );
+  }, [sendRequest]);
+
+  // STORING THE NEWLY CREATED TASK TO AN ARRAY
+  const addTask = (taskObj) => {
+    setTasks((prevTask) => [...prevTask, taskObj]);
+  };
+
+  // REMOVING TASK FROM THE LIST (ARRAY)
+  const removeTask = (taskId) => {
+    const applyData = (data) => {
+      if (!data) {
+        const updatedTaskList = tasks.filter((task) => task.id !== taskId);
+        setTasks(updatedTaskList);
+      }
+    };
+
+    sendRequest(
+      {
+        url: `https://taskapp-fetch-post-default-rtdb.firebaseio.com/tasks/${taskId}.json`,
+        method: "DELETE",
+      },
+      applyData
+    );
+  };
+
   return (
-    <Container>
+    <AppContainer>
       <Header />
-      <Input />
-      <TaskList data={dummy_data} />
-    </Container>
+      <Input onAddTask={addTask} />
+      {!isLoaded && !error && <LoadingMessage>Loading...</LoadingMessage>}
+      {error && !isLoaded && <ErrorMessage>{error}</ErrorMessage>}
+      {isLoaded && !error && (
+        <TaskList tasks={tasks} onRemoveTask={removeTask} />
+      )}
+    </AppContainer>
   );
 }
 

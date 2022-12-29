@@ -1,28 +1,15 @@
 import React from "react";
-import styled from "styled-components";
+import { TaskContainer, Text } from "./Task.styled";
 
-const Container = styled.div`
-  background-color: #58287F;
-  margin: 8px;
-  padding: 5px 15px;
-  border: 1px solid white;
-  border-radius: 10px;
-  width: 100%;
-`;
-
-const Text = styled.p`
-  color: white;
-  font-size: 16px;
-  font-weight: 500;
-`;
-
-const Task = (props) => {
-  const { text } = props.task;
+const Task = ({ task, onRemoveTask }) => {
+  const onClickHandler = () => {
+    onRemoveTask(task.id);
+  };
 
   return (
-    <Container>
-      <Text>{text}</Text>
-    </Container>
+    <TaskContainer onClick={onClickHandler}>
+      <Text>{task.text}</Text>
+    </TaskContainer>
   );
 };
 
