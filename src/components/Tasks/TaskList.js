@@ -1,19 +1,33 @@
 import React from "react";
-import styled from "styled-components";
+import { Container } from "./TaskList.styled";
 import Task from "./Task";
 
-const Container = styled.div`
-  max-width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 3vh;
-`;
+const TaskList = ({ data }) => {
+  // DELETING TASK
+  const removeTask = async (id) => {
+    await fetch(
+      `https://taskapp-fetch-post-default-rtdb.firebaseio.com/tasks/${id}.json`,
+      {
+        method: "DELETE",
+        body: null,
+      }
+    ).catch((error) => {
+      console.log(error.message);
+    });
+  };
 
-const TaskList = (props) => {
-  const eachTask = props.data.map((task) => {
-    return <Task key={task.id} task={task} />;
+  // REACHING EACH TASK OF THE FIREBASE OBJECT
+  const eachTask = Object.entries(data).map((value) => {
+    return (
+      <Task
+        key={value[0]}
+        task={value[1]}
+        id={value[0]}
+        onRemoveTask={removeTask}
+      />
+    );
   });
+
   return <Container>{eachTask}</Container>;
 };
 

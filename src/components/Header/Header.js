@@ -1,26 +1,11 @@
 import React from "react";
-import styled from "styled-components";
-
-const Name = styled.h2`
-  color: #89c4e1;
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 10vh;
-`;
-
-const Approach = styled.p`
-  color: white;
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
-  margin: 0;
-`;
+import { Name, Comment, Approach } from './Header.styled';
 
 const Header = () => {
   return (
     <>
-      <Name>HTTP REQUEST (fetching and posting)</Name>
+      <Name>HTTP REQUEST</Name>
+      <Comment>(fetching and posting user entered data)</Comment>
       <Approach>CLASSIC APPROACH</Approach>
     </>
   );

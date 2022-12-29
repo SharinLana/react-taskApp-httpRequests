@@ -1,0 +1,8 @@
+- getting user-entered data on every keystroke (using onChange React event listener)
+- input validation (no-empty value);
+- POSTing user-entered data to the Firebase Realtime Database using fetch() method;
+- fetching and displaying the data previously entered by the user and stored in Firebase when the app is loaded or the button is clicked;
+- React hooks: useState(), useEffect();
+- JS methods: setTimeout(), async-await, fetch(), trim(), Object.entries(), map(), etc;
+- transferring states and data from parents to children and vice versa;
+- React styled components;
