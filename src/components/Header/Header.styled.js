@@ -10,6 +10,7 @@ export const Name = styled.h2`
   @media all and (max-width: 500px) {
     margin: 6vh 0px 10px 0px;
     font-size: 22px;
+    padding: 0px 15px;
   }
 
   @media all and (max-width: 350px) {
@@ -25,7 +26,8 @@ export const Comment = styled.p`
   margin-top: 0;
 
   @media all and (max-width: 500px) {
-    font-size: 22px;
+    font-size: 20px;
+    padding: 0px 15px;
   }
 
   @media all and (max-width: 350px) {
@@ -41,7 +43,8 @@ export const Approach = styled.p`
   margin: 0;
 
   @media all and (max-width: 500px) {
-    font-size: 22px;
+    font-size: 20px;
+    padding: 0px 15px;
   }
 
   @media all and (max-width: 350px) {

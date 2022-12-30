@@ -17,6 +17,12 @@ export const InputField = styled.input`
   font-size: 16px;
   padding: 5px 5px 5px 15px;
   margin-right: 10px;
+
+  @media all and (max-width: 350px) {
+    font-size: 14px;
+    margin-right: 5px;
+    width: 200px;
+  }
 `;
 
 export const Button = styled.button`
@@ -30,4 +36,9 @@ export const Button = styled.button`
   border-radius: 5px;
   background-color: ${(props) => (props.hover ? "white" : "#89c4e1")};
   color: ${(props) => (props.hover ? "#58287F" : "#1a0000")};
+
+  @media all and (max-width: 350px) {
+    font-size: 14px;
+    margin-left: 5px;
+  }
 `;

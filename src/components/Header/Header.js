@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <>
       <Name>HTTP REQUEST</Name>
-      <Comment>(fetching and posting user entered data)</Comment>
+      <Comment>(fetching, posting and deleting user entered data)</Comment>
       <Approach>CLASSIC APPROACH</Approach>
     </>
   );
