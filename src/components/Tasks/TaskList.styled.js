@@ -9,4 +9,8 @@ export const ListContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 3vh;
+
+  @media all and (max-width: 500px) {
+    width: 300px;
+  }
 `;
