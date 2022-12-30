@@ -6,6 +6,15 @@ export const Name = styled.h2`
   font-weight: 700;
   text-align: center;
   margin-top: 10vh;
+
+  @media all and (max-width: 500px) {
+    margin: 6vh 0px 10px 0px;
+    font-size: 22px;
+  }
+
+  @media all and (max-width: 350px) {
+    font-size: 18px;
+  }
 `;
 
 export const Comment = styled.p`
@@ -14,6 +23,14 @@ export const Comment = styled.p`
   font-weight: 500;
   text-align: center;
   margin-top: 0;
+
+  @media all and (max-width: 500px) {
+    font-size: 22px;
+  }
+
+  @media all and (max-width: 350px) {
+    font-size: 18px;
+  }
 `;
 
 export const Approach = styled.p`
@@ -22,4 +39,12 @@ export const Approach = styled.p`
   font-weight: 500;
   text-align: center;
   margin: 0;
+
+  @media all and (max-width: 500px) {
+    font-size: 22px;
+  }
+
+  @media all and (max-width: 350px) {
+    font-size: 18px;
+  }
 `;
