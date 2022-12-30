@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InputContainer, InputField, AddButton } from "./Input.styled";
+import { InputContainer, InputField, Button } from "./Input.styled";
 
 const Input = ({ onBtnPressed, onGetNewTask }) => {
   const [hover, setHover] = useState(false);
@@ -51,14 +51,14 @@ const Input = ({ onBtnPressed, onGetNewTask }) => {
         onChange={getInputValue}
         value={inputValue}
       />
-      <AddButton
+      <Button
         onMouseOver={onMouseOverHandler}
         onMouseOut={onMouseOutHandler}
         onClick={onClickHandler}
         hover={hover}
       >
         Add Task
-      </AddButton>
+      </Button>
     </InputContainer>
   );
 };

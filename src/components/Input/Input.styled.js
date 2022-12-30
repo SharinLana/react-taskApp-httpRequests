@@ -19,7 +19,7 @@ export const InputField = styled.input`
   margin-right: 10px;
 `;
 
-export const AddButton = styled.button`
+export const Button = styled.button`
   height: 100%;
   font-size: 16px;
   font-weight: 700;
