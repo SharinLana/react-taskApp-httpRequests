@@ -4,7 +4,7 @@ export const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #1a0000;
+  background: linear-gradient(#58287f, #1a0000);
   width: 100%;
   height: 100vh;
 `;
