@@ -2,7 +2,7 @@ import React from "react";
 import { ListContainer } from "./TaskList.styled";
 import Task from "./Task";
 
-const TaskList = ({ data }) => {
+const TaskList = ({ data, onRemoveTask }) => {
   // DELETING TASK
   const removeTask = async (id) => {
     await fetch(
@@ -14,6 +14,10 @@ const TaskList = ({ data }) => {
     ).catch((error) => {
       console.log(error.message);
     });
+
+    // TRANSFERRING THE ID OF THE SELECTED TASK TO APP.JS
+    // FOR DELETING THE TASK OBJECT FROM THE ARRAY
+    onRemoveTask(id);
   };
 
   // REACHING EACH TASK OF THE FIREBASE OBJECT

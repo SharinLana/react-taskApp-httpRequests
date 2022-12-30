@@ -14,49 +14,52 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  const [fetchedTasks, setFetchedTasks] = useState([]);
-  const [btnPressed, setBtnPressed] = useState(false);
-
-  // CATCHING THE MOMENT THE BUTTON IS CLICKED
-  const btnPressedHandler = () => {
-    setBtnPressed(true);
-    setTimeout(() => {
-      setBtnPressed(false);
-    }, 500);
-  };
+  const [tasks, setTasks] = useState([]);
 
   // FETCHING THE DATA FROM FIREBASE ON THE PAGE LOAD
   useEffect(() => {
-    if (fetchedTasks || btnPressed) {
-      const fetchTasks = async () => {
-        const response = await fetch(
-          "https://taskapp-fetch-post-default-rtdb.firebaseio.com/tasks.json"
-        );
-        const userTasks = await response.json();
+    const fetchTasks = async () => {
+      const response = await fetch(
+        "https://taskapp-fetch-post-default-rtdb.firebaseio.com/tasks.json"
+      );
+      const userTasks = await response.json();
 
-        const loadedTasks = [];
+      // TRANSFORMING THE RECEIVED DATA FROM FIREBASE
+      // (AN OBJECT WITH NESTED OBJECTS)
+      // AND STORING IT TO THE ARRAY
+      const loadedTasks = [];
 
-        for (let key in userTasks) {
-          loadedTasks.push({ id: key, text: userTasks[key].text });
-        }
-        setFetchedTasks(loadedTasks);
-      };
-      fetchTasks().catch((error) => {
-        console.log(error.message);
-      });
-    }
-  }, [btnPressed, fetchedTasks]);
+      for (let key in userTasks) {
+        loadedTasks.push({ id: key, text: userTasks[key].text });
+      }
 
-  // ADDING USER-ENTERED TASK TO THE ARRAY OF TASKS
+      setTasks(loadedTasks);
+    };
+    
+    fetchTasks().catch((error) => {
+      console.log(error.message);
+    });
+  }, []);
+
+  // ADDING THE USER-ENTERED TASK TO THE ARRAY OF TASKS
   const addNewTask = (taskData) => {
-    setFetchedTasks((prevTasks) => [...prevTasks, {id: taskData.id, text: taskData.text}]);
+    setTasks((prevTasks) => [
+      ...prevTasks,
+      { id: taskData.id, text: taskData.text },
+    ]);
+  };
+
+  // REMOVING THE SELECTED TASK FROM THE TASK LIST
+  const removeTask = (taskId) => {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(updatedTasks);
   };
 
   return (
     <AppContainer>
       <Header />
-      <Input onBtnPressed={btnPressedHandler} onGetNewTask={addNewTask} />
-      {fetchedTasks && <TaskList data={fetchedTasks} />}
+      <Input onGetNewTask={addNewTask} />
+      {tasks && <TaskList data={tasks} onRemoveTask={removeTask} />}
     </AppContainer>
   );
 }

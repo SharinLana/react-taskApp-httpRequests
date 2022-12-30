@@ -6,7 +6,7 @@ export const TaskContainer = styled.div`
   padding: 5px 15px;
   border: 1px solid white;
   border-radius: 10px;
-  width: 100%;
+  width: 90%;
 `;
 
 export const TaskText = styled.p`
