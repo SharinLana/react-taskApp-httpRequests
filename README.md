@@ -4,7 +4,8 @@
 All the http requests are handled directly in the React components`
 
 > This application allows you to write/delete daily tasks. Each task will be stored in a Firebase Realtime Database until you delete it by clicking on the task field on the screen.
-> `NOTE: The app was created using 2 different approaches:
+
+`NOTE: The app was created using 2 different approaches:
 
 - the first is the classic approach with creating http requests directly in the components (stored in the branch main);
 - the second approach uses a custom hook, when all the http request logic is stored inside the useHttp() custom hook and then executed in the components (stored in the branch custom-hook).`
