@@ -4,7 +4,7 @@ import Header from "./components/Header/Header";
 import Input from "./components/Input/Input";
 import TaskList from "./components/Tasks/TaskList";
 
-const Container = styled.div`
+const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,7 +14,7 @@ const Container = styled.div`
 `;
 
 function App() {
-  const [fetchedTasks, setFetchedTasks] = useState({});
+  const [fetchedTasks, setFetchedTasks] = useState([]);
   const [btnPressed, setBtnPressed] = useState(false);
 
   // CATCHING THE MOMENT THE BUTTON IS CLICKED
@@ -33,7 +33,13 @@ function App() {
           "https://taskapp-fetch-post-default-rtdb.firebaseio.com/tasks.json"
         );
         const userTasks = await response.json();
-        setFetchedTasks(userTasks);
+
+        const loadedTasks = [];
+
+        for (let key in userTasks) {
+          loadedTasks.push({ id: key, text: userTasks[key].text });
+        }
+        setFetchedTasks(loadedTasks);
       };
       fetchTasks().catch((error) => {
         console.log(error.message);
@@ -41,12 +47,17 @@ function App() {
     }
   }, [btnPressed, fetchedTasks]);
 
+  // ADDING USER-ENTERED TASK TO THE ARRAY OF TASKS
+  const addNewTask = (taskData) => {
+    setFetchedTasks((prevTasks) => [...prevTasks, {id: taskData.id, text: taskData.text}]);
+  };
+
   return (
-    <Container>
+    <AppContainer>
       <Header />
-      <Input onBtnPressed={btnPressedHandler} />
+      <Input onBtnPressed={btnPressedHandler} onGetNewTask={addNewTask} />
       {fetchedTasks && <TaskList data={fetchedTasks} />}
-    </Container>
+    </AppContainer>
   );
 }
 

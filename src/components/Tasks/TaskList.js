@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "./TaskList.styled";
+import { ListContainer } from "./TaskList.styled";
 import Task from "./Task";
 
 const TaskList = ({ data }) => {
@@ -17,18 +17,18 @@ const TaskList = ({ data }) => {
   };
 
   // REACHING EACH TASK OF THE FIREBASE OBJECT
-  const eachTask = Object.entries(data).map((value) => {
+  const eachTask = data.map((task) => {
     return (
       <Task
-        key={value[0]}
-        task={value[1]}
-        id={value[0]}
+        key={task.id}
+        task={task.text}
+        id={task.id}
         onRemoveTask={removeTask}
       />
     );
   });
 
-  return <Container>{eachTask}</Container>;
+  return <ListContainer>{eachTask}</ListContainer>;
 };
 
 export default TaskList;

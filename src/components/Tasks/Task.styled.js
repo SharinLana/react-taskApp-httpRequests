@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const TaskContainer = styled.div`
   background-color: #58287f;
   margin: 8px;
   padding: 5px 15px;
@@ -9,7 +9,7 @@ export const Container = styled.div`
   width: 100%;
 `;
 
-export const Text = styled.p`
+export const TaskText = styled.p`
   color: white;
   font-size: 16px;
   font-weight: 500;

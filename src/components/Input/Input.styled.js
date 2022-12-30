@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const InputContainer = styled.div`
   max-width: 80%;
   display: flex;
   justify-content: center;
@@ -19,7 +19,7 @@ export const InputField = styled.input`
   margin-right: 10px;
 `;
 
-export const Button = styled.button`
+export const AddButton = styled.button`
   height: 100%;
   font-size: 16px;
   font-weight: 700;

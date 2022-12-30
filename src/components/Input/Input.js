@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Container, InputField, Button } from "./Input.styled";
+import { InputContainer, InputField, AddButton } from "./Input.styled";
 
-const Input = ({ onBtnPressed }) => {
+const Input = ({ onBtnPressed, onGetNewTask }) => {
   const [hover, setHover] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -14,7 +14,7 @@ const Input = ({ onBtnPressed }) => {
   const onClickHandler = async () => {
     if (inputValue.trim() === "") return;
 
-    await fetch(
+    const response = await fetch(
       "https://taskapp-fetch-post-default-rtdb.firebaseio.com/tasks.json",
       {
         method: "POST",
@@ -23,10 +23,14 @@ const Input = ({ onBtnPressed }) => {
         },
         body: JSON.stringify(inputValue),
       }
-    ).catch((error) => {
-      console.log(error.message);
-    });
+    );
 
+    const data = await response.json();
+
+    const generatedId = data.name; // firebase key name for the unique id
+    const enteredTaskObj = {id: generatedId, text: inputValue};
+
+    onGetNewTask(enteredTaskObj)
     setInputValue("");
     onBtnPressed();
   };
@@ -41,21 +45,21 @@ const Input = ({ onBtnPressed }) => {
   };
 
   return (
-    <Container>
+    <InputContainer>
       <InputField
         placeholder="Task..."
         onChange={getInputValue}
         value={inputValue}
       />
-      <Button
+      <AddButton
         onMouseOver={onMouseOverHandler}
         onMouseOut={onMouseOutHandler}
         onClick={onClickHandler}
         hover={hover}
       >
         Add Task
-      </Button>
-    </Container>
+      </AddButton>
+    </InputContainer>
   );
 };
 
