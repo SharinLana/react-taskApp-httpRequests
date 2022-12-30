@@ -17,6 +17,8 @@ const Input = ({ onAddTask }) => {
 
   // ADDING A NEW TASK
   const addTaskHandler = () => {
+    if (inputRef.current.value.trim() === '') return;
+    
     const taskText = inputRef.current.value;
 
     // FUNCTION FROM THE CUSTOM HOOK
