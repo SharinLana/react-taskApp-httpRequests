@@ -21,6 +21,12 @@ The main goals for me as a web developer were to improve my skills in working wi
 - JavaScript logic and methods (filter(), map(), trim(), bind(), ternary operator, if/else statement, spread operator, etc);
 - React styled components;
 
+## To view the app in the browser, copy and paste the following line to your browser URL address bar:
+
+```
+https://sharinlana.github.io/react-taskApp-httpRequests/
+```
+
 ## To start the app on your machine:
 
 1. Clone the project to your machine by running:
